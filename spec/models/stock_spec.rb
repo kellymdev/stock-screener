@@ -52,6 +52,20 @@ RSpec.describe Stock, type: :model do
           expect(stock).not_to be_valid
         end
       end
+
+      context 'when the ticker symbol already exists for the stock exchange' do
+        let!(:existing_stock) do
+          stock_exchange.stocks.create!(
+            company_name: name,
+            ticker_symbol: ticker
+          )
+        end
+
+        it 'is invalid' do
+          expect(stock).not_to be_valid
+          expect(stock.errors.full_messages).to include('Ticker symbol should be unique for each stock exchange')
+        end
+      end
     end
   end
 end
