@@ -1,5 +1,6 @@
 class Stock < ApplicationRecord
   has_many :share_prices, dependent: :destroy
+  has_many :dividends, dependent: :destroy
   belongs_to :stock_exchange
 
   validates :company_name, presence: true, length: { minimum: 5 }
