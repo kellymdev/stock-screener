@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180303045834) do
+ActiveRecord::Schema.define(version: 20180303063214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "share_prices", force: :cascade do |t|
+    t.bigint "stock_id"
+    t.bigint "year_id"
+    t.decimal "high_value"
+    t.decimal "low_value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stock_id"], name: "index_share_prices_on_stock_id"
+    t.index ["year_id"], name: "index_share_prices_on_year_id"
+  end
 
   create_table "stock_exchanges", force: :cascade do |t|
     t.string "name"
