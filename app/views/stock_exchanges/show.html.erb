@@ -1,0 +1,7 @@
+<h2><%= @stock_exchange.name %></h2>
+
+<ul>
+  <% @stocks.each do |stock| %>
+    <li><%= stock.ticker_symbol %> - <%= stock.company_name %></li>
+  <% end %>
+</ul>

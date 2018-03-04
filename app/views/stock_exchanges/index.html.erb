@@ -2,6 +2,6 @@
 
 <ul>
   <% @stock_exchanges.each do |exchange| %>
-    <li><%= exchange.name %></li>
+    <li><%= link_to(exchange.name, stock_exchange_path(exchange)) %></li>
   <% end %>
 </ul>
