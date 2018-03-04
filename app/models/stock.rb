@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Stock < ApplicationRecord
   has_many :share_prices, dependent: :destroy
   has_many :dividends, dependent: :destroy

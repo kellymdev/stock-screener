@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SharePrice < ApplicationRecord
   belongs_to :stock
   belongs_to :year

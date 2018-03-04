@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class StockExchange < ApplicationRecord
   has_many :stocks, dependent: :destroy
 
