@@ -2,6 +2,7 @@
 
 class StocksController < ApplicationController
   before_action :find_stock_exchange
+  before_action :find_stock, only: [:show]
 
   def new
     @stock = @stock_exchange.stocks.new
@@ -17,10 +18,17 @@ class StocksController < ApplicationController
     end
   end
 
+  def show
+  end
+
   private
 
   def find_stock_exchange
     @stock_exchange = StockExchange.find(params[:stock_exchange_id])
+  end
+
+  def find_stock
+    @stock = Stock.find(params[:id])
   end
 
   def stock_params

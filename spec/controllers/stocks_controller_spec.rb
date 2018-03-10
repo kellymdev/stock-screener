@@ -3,7 +3,13 @@ require 'rails_helper'
 RSpec.describe StocksController, type: :controller do
   render_views
 
-  let(:stock_exchange) { StockExchange.create!(name: 'ASX') }
+  let!(:stock_exchange) { StockExchange.create!(name: 'ASX') }
+  let!(:stock) do
+    stock_exchange.stocks.create!(
+      company_name: 'Existing Stock',
+      ticker_symbol: 'EXT'
+    )
+  end
 
   describe '#new' do
     it 'returns http status 200' do
@@ -37,6 +43,14 @@ RSpec.describe StocksController, type: :controller do
       it 'does not create a new stock' do
         expect { post :create, params: stock_params }.to change { Stock.count }.by 0
       end
+    end
+  end
+
+  describe '#show' do
+    it 'returns http status 200' do
+      get :show, params: { stock_exchange_id: stock_exchange.id, id: stock.id }
+
+      expect(response.status).to eq 200
     end
   end
 end
