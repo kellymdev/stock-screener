@@ -1,9 +1,9 @@
-<h2>Add Stock</h2>
+<h2>Edit Stock</h2>
 
 <%= render partial: 'errors' if @stock.errors.any? %>
 
 <%= form_for([@stock_exchange, @stock]) do |f| %>
   <%= render partial: 'form', locals: { f: f } %>
 
-  <%= f.submit 'Create Stock' %>
+  <%= f.submit 'Edit Stock' %>
 <% end %>

@@ -2,7 +2,7 @@
 
 class StocksController < ApplicationController
   before_action :find_stock_exchange
-  before_action :find_stock, only: [:show]
+  before_action :find_stock, only: [:show, :edit, :update]
 
   def new
     @stock = @stock_exchange.stocks.new
@@ -12,13 +12,24 @@ class StocksController < ApplicationController
     @stock = @stock_exchange.stocks.new(stock_params)
 
     if @stock.save
-      redirect_to @stock_exchange
+      redirect_to [@stock_exchange, @stock]
     else
       render :new
     end
   end
 
   def show
+  end
+
+  def edit
+  end
+
+  def update
+    if @stock.update(stock_params)
+      redirect_to [@stock_exchange, @stock]
+    else
+      render :edit
+    end
   end
 
   private

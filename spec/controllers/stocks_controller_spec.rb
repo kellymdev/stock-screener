@@ -31,6 +31,7 @@ RSpec.describe StocksController, type: :controller do
         }
       }
     end
+
     context 'with valid params' do
       it 'creates a new stock' do
         expect { post :create, params: stock_params }.to change { Stock.count }.by 1
@@ -51,6 +52,47 @@ RSpec.describe StocksController, type: :controller do
       get :show, params: { stock_exchange_id: stock_exchange.id, id: stock.id }
 
       expect(response.status).to eq 200
+    end
+  end
+
+  describe '#edit' do
+    it 'returns http status 200' do
+      get :edit, params: { stock_exchange_id: stock_exchange.id, id: stock.id }
+
+      expect(response.status).to eq 200
+    end
+  end
+
+  describe '#update' do
+    let(:company_name) { 'Test Ltd' }
+    let(:ticker_symbol) { 'TST' }
+    let(:stock_params) do
+      {
+        stock_exchange_id: stock_exchange.id,
+        id: stock.id,
+        stock: {
+          company_name: company_name,
+          ticker_symbol: ticker_symbol
+        }
+      }
+    end
+
+    context 'with valid params' do
+      it 'updates the stock' do
+        put :update, params: stock_params
+
+        expect(stock.reload.company_name).to eq company_name
+      end
+    end
+
+    context 'with invalid params' do
+      let(:company_name) { 'Test' }
+
+      it 'does not update the stock' do
+        put :update, params: stock_params
+
+        expect(stock.reload.company_name).to eq 'Existing Stock'
+      end
     end
   end
 end
