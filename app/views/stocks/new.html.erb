@@ -1,0 +1,7 @@
+<h2>Add Stock</h2>
+
+<%= form_for([@stock_exchange, @stock]) do |f| %>
+  <%= render partial: 'form', locals: { f: f } %>
+
+  <%= f.submit 'Create Stock' %>
+<% end %>
