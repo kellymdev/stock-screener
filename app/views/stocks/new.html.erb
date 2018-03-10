@@ -1,5 +1,15 @@
 <h2>Add Stock</h2>
 
+<% if @stock.errors.any? %>
+  <div class="error-list">
+    <ul>
+      <% @stock.errors.full_messages.each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_for([@stock_exchange, @stock]) do |f| %>
   <%= render partial: 'form', locals: { f: f } %>
 

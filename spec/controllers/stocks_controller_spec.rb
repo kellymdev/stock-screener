@@ -12,4 +12,31 @@ RSpec.describe StocksController, type: :controller do
       expect(response.status).to eq 200
     end
   end
+
+  describe '#create' do
+    let(:company_name) { 'Test Ltd' }
+    let(:ticker_symbol) { 'TST' }
+    let(:stock_params) do
+      {
+        stock_exchange_id: stock_exchange.id,
+        stock: {
+          company_name: company_name,
+          ticker_symbol: ticker_symbol
+        }
+      }
+    end
+    context 'with valid params' do
+      it 'creates a new stock' do
+        expect { post :create, params: stock_params }.to change { Stock.count }.by 1
+      end
+    end
+
+    context 'with invalid params' do
+      let(:company_name) { 'Test' }
+
+      it 'does not create a new stock' do
+        expect { post :create, params: stock_params }.to change { Stock.count }.by 0
+      end
+    end
+  end
 end
