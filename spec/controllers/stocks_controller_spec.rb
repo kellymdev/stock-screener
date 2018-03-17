@@ -49,7 +49,7 @@ RSpec.describe StocksController, type: :controller do
 
   describe '#show' do
     it 'returns http status 200' do
-      get :show, params: { stock_exchange_id: stock_exchange.id, id: stock.id }
+      get :show, params: { id: stock.id }
 
       expect(response.status).to eq 200
     end
@@ -57,7 +57,7 @@ RSpec.describe StocksController, type: :controller do
 
   describe '#edit' do
     it 'returns http status 200' do
-      get :edit, params: { stock_exchange_id: stock_exchange.id, id: stock.id }
+      get :edit, params: { id: stock.id }
 
       expect(response.status).to eq 200
     end
@@ -68,7 +68,6 @@ RSpec.describe StocksController, type: :controller do
     let(:ticker_symbol) { 'TST' }
     let(:stock_params) do
       {
-        stock_exchange_id: stock_exchange.id,
         id: stock.id,
         stock: {
           company_name: company_name,

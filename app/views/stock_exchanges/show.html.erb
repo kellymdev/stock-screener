@@ -4,6 +4,6 @@
 
 <ul>
   <% @stocks.each do |stock| %>
-    <li><%= link_to(stock.ticker_symbol, stock_exchange_stock_path(@stock_exchange, stock)) %> - <%= stock.company_name %></li>
+    <li><%= link_to(stock.ticker_symbol, stock_path(stock)) %> - <%= stock.company_name %></li>
   <% end %>
 </ul>

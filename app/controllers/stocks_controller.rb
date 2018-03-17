@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class StocksController < ApplicationController
-  before_action :find_stock_exchange
+  before_action :find_stock_exchange, only: [:new, :create]
   before_action :find_stock, only: [:show, :edit, :update]
 
   def new
@@ -12,13 +12,14 @@ class StocksController < ApplicationController
     @stock = @stock_exchange.stocks.new(stock_params)
 
     if @stock.save
-      redirect_to [@stock_exchange, @stock]
+      redirect_to @stock
     else
       render :new
     end
   end
 
   def show
+    @stock_exchange = @stock.stock_exchange
   end
 
   def edit
@@ -26,7 +27,7 @@ class StocksController < ApplicationController
 
   def update
     if @stock.update(stock_params)
-      redirect_to [@stock_exchange, @stock]
+      redirect_to @stock
     else
       render :edit
     end
