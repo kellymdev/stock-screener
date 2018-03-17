@@ -2,7 +2,7 @@
 
 class SharePricesController < ApplicationController
   before_action :find_stock, only: [:new, :create]
-  before_action :find_share_price, only: [:edit, :update]
+  before_action :find_share_price, only: [:edit, :update, :destroy]
 
   def new
     @share_price = @stock.share_prices.new
@@ -26,6 +26,13 @@ class SharePricesController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @stock = @share_price.stock
+    @share_price.destroy!
+
+    redirect_to @stock
   end
 
   private

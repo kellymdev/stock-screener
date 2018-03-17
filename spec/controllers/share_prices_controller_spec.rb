@@ -94,4 +94,10 @@ RSpec.describe SharePricesController, type: :controller do
       end
     end
   end
+
+  describe '#destroy' do
+    it 'deletes the share price' do
+      expect { delete :destroy, params: { id: share_price.id } }.to change { SharePrice.count }.by -1
+    end
+  end
 end
