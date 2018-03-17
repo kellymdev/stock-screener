@@ -2,6 +2,7 @@
 
 class DividendsController < ApplicationController
   before_action :find_stock, only: [:new, :create]
+  before_action :find_dividend, only: [:edit, :update]
 
   def new
     @dividend = @stock.dividends.new
@@ -17,10 +18,16 @@ class DividendsController < ApplicationController
     end
   end
 
+  def edit; end
+
   private
 
   def find_stock
     @stock = Stock.find(params[:stock_id])
+  end
+
+  def find_dividend
+    @dividend = Dividend.find(params[:id])
   end
 
   def dividend_params

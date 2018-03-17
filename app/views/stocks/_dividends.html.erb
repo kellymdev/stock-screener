@@ -16,7 +16,7 @@
       <tr>
         <td><%= dividend.year.year_number %></td>
         <td><%= dollar_value(dividend.value) %></td>
-        <td></td>
+        <td><%= link_to 'Edit', edit_dividend_path(dividend) %></td>
       </tr>
     <% end %>
   </tbody>

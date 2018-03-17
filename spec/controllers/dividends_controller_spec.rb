@@ -11,6 +11,12 @@ RSpec.describe DividendsController, type: :controller do
     )
   end
   let(:year) { Year.create!(year_number: 2017) }
+  let!(:dividend) do
+    stock.dividends.create!(
+      year: year,
+      value: 0.05
+    )
+  end
 
   describe '#new' do
     it 'returns http status 200' do
@@ -45,6 +51,14 @@ RSpec.describe DividendsController, type: :controller do
       it 'does not create a dividend' do
         expect { post :create, params: params }.to change { Dividend.count }.by 0
       end
+    end
+  end
+
+  describe '#edit' do
+    it 'returns http status 200' do
+      get :edit, params: { id: dividend.id }
+
+      expect(response.status).to eq 200
     end
   end
 end
