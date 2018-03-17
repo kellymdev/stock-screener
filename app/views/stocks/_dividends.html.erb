@@ -1,3 +1,23 @@
 <h3>Dividends</h3>
 
 <%= link_to 'Add Dividend', new_stock_dividend_path(@stock) %>
+
+<table>
+  <thead>
+    <tr>
+      <td>Year</td>
+      <td>Value ($)</td>
+      <td>Actions</td>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stock.dividends.each do |dividend| %>
+      <tr>
+        <td><%= dividend.year.year_number %></td>
+        <td><%= dollar_value(dividend.value) %></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
