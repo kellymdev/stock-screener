@@ -3,12 +3,20 @@ require 'rails_helper'
 RSpec.describe SharePricesController, type: :controller do
   render_views
 
-  let!(:year) { Year.create!(year_number: '2017') }
+  let!(:year_2017) { Year.create!(year_number: 2017) }
+  let!(:year_2016) { Year.create!(year_number: 2016) }
   let!(:stock_exchange) { StockExchange.create!(name: 'ASX') }
   let!(:stock) do
     stock_exchange.stocks.create!(
       company_name: 'Test Ltd',
       ticker_symbol: 'TST'
+    )
+  end
+  let!(:share_price) do
+    stock.share_prices.create!(
+      year: year_2016,
+      high_value: 1.89,
+      low_value: 1.28
     )
   end
 
@@ -26,7 +34,7 @@ RSpec.describe SharePricesController, type: :controller do
       {
         stock_id: stock.id,
         share_price: {
-          year_id: year.id,
+          year_id: year_2017.id,
           high_value: high_value,
           low_value: '1.09'
         }
@@ -44,6 +52,45 @@ RSpec.describe SharePricesController, type: :controller do
 
       it 'does not create a share price' do
         expect { post :create, params: params }.to change { SharePrice.count }.by 0
+      end
+    end
+  end
+
+  describe '#edit' do
+    it 'returns http status 200' do
+      get :edit, params: { id: share_price.id }
+
+      expect(response.status).to eq 200
+    end
+  end
+
+  describe '#update' do
+    let(:high_value) { 2.45 }
+    let(:low_value) { 1.20 }
+    let(:params) do
+      {
+        id: share_price.id,
+        share_price: {
+          year_id: year_2016.id,
+          high_value: high_value,
+          low_value: low_value
+        }
+      }
+    end
+
+    context 'with valid params' do
+      it 'updates the share price' do
+        put :update, params: params
+
+        expect(share_price.reload.high_value).to eq high_value
+        expect(share_price.reload.low_value).to eq low_value
+      end
+    end
+
+    context 'with invalid params' do
+      it 'does not update the share price' do
+        expect(share_price.reload.high_value).to eq 1.89
+        expect(share_price.reload.low_value).to eq 1.28
       end
     end
   end

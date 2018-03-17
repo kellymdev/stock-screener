@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :stock_exchanges, only: [:index, :show], shallow: true do
     resources :stocks, only: [:new, :create, :show, :edit, :update] do
-      resources :share_prices, only: [:new, :create]
+      resources :share_prices, only: [:new, :create, :edit, :update]
     end
   end
 end

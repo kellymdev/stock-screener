@@ -8,6 +8,7 @@
       <td>Year</td>
       <td>High ($)</td>
       <td>Low ($)</td>
+      <td>Actions</td>
     </tr>
   </thead>
 
@@ -17,6 +18,7 @@
         <td><%= price.year.year_number %></td>
         <td><%= dollar_value(price.high_value) %></td>
         <td><%= dollar_value(price.low_value) %></td>
+        <td><%= link_to 'Edit', edit_share_price_path(price) %></td>
       </tr>
     <% end %>
   </tbody>
