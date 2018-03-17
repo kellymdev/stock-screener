@@ -1,6 +1,6 @@
 <h2>New Dividend for <%= full_ticker_symbol(@stock) %></h2>
 
-<%= render partial: 'shared_errors', locals: { item: @dividend } if @dividend.errors.any? %>
+<%= render partial: 'shared/errors', locals: { item: @dividend } if @dividend.errors.any? %>
 
 <%= form_for([@stock, @dividend]) do |f| %>
   <%= render partial: 'form', locals: { f: f } %>

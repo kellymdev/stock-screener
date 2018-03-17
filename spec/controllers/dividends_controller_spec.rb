@@ -19,4 +19,32 @@ RSpec.describe DividendsController, type: :controller do
       expect(response.status).to eq 200
     end
   end
+
+  describe '#create' do
+    let(:params) do
+      {
+        stock_id: stock.id,
+        dividend: {
+          year_id: year.id,
+          value: value
+        }
+      }
+    end
+
+    context 'with valid params' do
+      let(:value) { 0.05 }
+
+      it 'creates a dividend' do
+        expect { post :create, params: params }.to change { Dividend.count }.by 1
+      end
+    end
+
+    context 'with invalid params' do
+      let(:value) {}
+
+      it 'does not create a dividend' do
+        expect { post :create, params: params }.to change { Dividend.count }.by 0
+      end
+    end
+  end
 end
