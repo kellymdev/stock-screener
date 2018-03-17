@@ -19,7 +19,6 @@ class StocksController < ApplicationController
   end
 
   def show
-    @stock_exchange = @stock.stock_exchange
   end
 
   def edit

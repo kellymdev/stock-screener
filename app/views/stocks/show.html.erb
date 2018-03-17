@@ -1,5 +1,5 @@
 <h2><%= @stock.company_name %></h2>
-<p><%= @stock_exchange.name %>:<%= @stock.ticker_symbol %></p>
+<p><%= full_ticker_symbol(@stock) %></p>
 
 <div class="actions">
   <%= link_to 'Edit Stock', edit_stock_path(@stock) %>

@@ -1,0 +1,8 @@
+<%= f.label :year %>
+<%= f.collection_select(:year_id, Year.all, :id, :year_number) %>
+
+<%= f.label :high_value %>
+<%= f.text_field :high_value %>
+
+<%= f.label :low_value %>
+<%= f.text_field :low_value %>

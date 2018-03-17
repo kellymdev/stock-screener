@@ -1,0 +1,7 @@
+<h2>New Share Price for <%= full_ticker_symbol(@stock) %></h2>
+
+<%= form_for([@stock, @share_price]) do |f| %>
+  <%= render partial: 'form', locals: { f: f } %>
+
+  <%= f.submit 'Add Share Price' %>
+<% end %>
