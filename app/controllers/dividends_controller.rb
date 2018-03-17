@@ -2,7 +2,7 @@
 
 class DividendsController < ApplicationController
   before_action :find_stock, only: [:new, :create]
-  before_action :find_dividend, only: [:edit, :update]
+  before_action :find_dividend, only: [:edit, :update, :destroy]
 
   def new
     @dividend = @stock.dividends.new
@@ -26,6 +26,13 @@ class DividendsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @stock = @dividend.stock
+    @dividend.destroy!
+
+    redirect_to @stock
   end
 
   private

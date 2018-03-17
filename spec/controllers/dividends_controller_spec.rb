@@ -93,4 +93,10 @@ RSpec.describe DividendsController, type: :controller do
       end
     end
   end
+
+  describe '#destroy' do
+    it 'deletes the dividend' do
+      expect { delete :destroy, params: { id: dividend.id } }.to change { Dividend.count }.by -1
+    end
+  end
 end
