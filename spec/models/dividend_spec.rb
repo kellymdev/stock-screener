@@ -12,19 +12,33 @@ RSpec.describe Dividend, type: :model do
     let(:year) { Year.create!(year_number: 2018) }
     let(:dividend) { stock.dividends.new(year: year, value: value) }
 
-    context 'with a value' do
-      let(:value) { 0.25 }
+    context 'with valid details' do
+      context 'with a valid value' do
+        let(:value) { 0.25 }
 
-      it 'is valid' do
-        expect(dividend).to be_valid
+        it 'is valid' do
+          expect(dividend).to be_valid
+        end
       end
     end
 
-    context 'without a value' do
-      let(:value) {}
+    context 'with invalid details' do
+      shared_examples 'an invalid dividend' do
+        it 'is invalid' do
+          expect(dividend).not_to be_valid
+        end
+      end
 
-      it 'is invalid' do
-        expect(dividend).not_to be_valid
+      context 'without a value' do
+        let(:value) {}
+
+        it_behaves_like 'an invalid dividend'
+      end
+
+      context 'with a non-numeric value' do
+        let(:value) { 'test' }
+
+        it_behaves_like 'an invalid dividend'
       end
     end
   end
