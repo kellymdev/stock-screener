@@ -61,4 +61,36 @@ RSpec.describe DividendsController, type: :controller do
       expect(response.status).to eq 200
     end
   end
+
+  describe '#update' do
+    let(:params) do
+      {
+        id: dividend.id,
+        dividend: {
+          year_id: year.id,
+          value: value
+        }
+      }
+    end
+
+    context 'with valid params' do
+      let(:value) { 0.08 }
+
+      it 'updates the dividend' do
+        put :update, params: params
+
+        expect(dividend.reload.value).to eq value
+      end
+    end
+
+    context 'with invalid params' do
+      let(:value) { 'test' }
+
+      it 'does not update the dividend' do
+        put :update, params: params
+
+        expect(dividend.reload.value).to eq 0.05
+      end
+    end
+  end
 end

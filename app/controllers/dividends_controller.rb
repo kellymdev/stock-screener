@@ -20,6 +20,14 @@ class DividendsController < ApplicationController
 
   def edit; end
 
+  def update
+    if @dividend.update(dividend_params)
+      redirect_to @dividend.stock
+    else
+      render :edit
+    end
+  end
+
   private
 
   def find_stock
