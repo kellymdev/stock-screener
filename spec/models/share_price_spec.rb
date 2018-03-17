@@ -21,8 +21,21 @@ RSpec.describe SharePrice, type: :model do
     end
 
     context 'with valid details' do
-      it 'is valid' do
-        expect(share_price).to be_valid
+      shared_examples 'a valid share price' do
+        it 'is valid' do
+          expect(share_price).to be_valid
+        end
+      end
+
+      context 'when the high value is higher than the low value' do
+        it_behaves_like 'a valid share price'
+      end
+
+      context 'when the high value is equal to the low value' do
+        let(:high_value) { 2.00 }
+        let(:low_value) { 2.00 }
+
+        it_behaves_like 'a valid share price'
       end
     end
 
@@ -65,6 +78,13 @@ RSpec.describe SharePrice, type: :model do
 
       context 'when the low value is not a number' do
         let(:low_value) { 'test' }
+
+        it_behaves_like 'an invalid share price'
+      end
+
+      context 'when the high value is lower than the low value' do
+        let(:high_value) { 2.00 }
+        let(:low_value) { 2.01 }
 
         it_behaves_like 'an invalid share price'
       end
