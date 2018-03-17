@@ -22,6 +22,12 @@ RSpec.describe Earning, type: :model do
     end
 
     context 'with invalid details' do
+      shared_examples 'an invalid earning' do
+        it 'is invalid' do
+          expect(earning).not_to be_valid
+        end
+      end
+
       context 'when the stock already has an earning record for that year' do
         let!(:existing_earning) { stock.earnings.create!(year: year, value: value) }
 
@@ -34,9 +40,13 @@ RSpec.describe Earning, type: :model do
       context 'without a value' do
         let(:value) {}
 
-        it 'is invalid' do
-          expect(earning).not_to be_valid
-        end
+        it_behaves_like 'an invalid earning'
+      end
+
+      context 'when the value is not numeric' do
+        let(:value) { 'test' }
+
+        it_behaves_like 'an invalid earning'
       end
     end
   end
