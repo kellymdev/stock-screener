@@ -1,6 +1,6 @@
 <h2>Add Stock</h2>
 
-<%= render partial: 'errors' if @stock.errors.any? %>
+<%= render partial: 'shared/errors', locals: { item: @stock } if @stock.errors.any? %>
 
 <%= form_for([@stock_exchange, @stock]) do |f| %>
   <%= render partial: 'form', locals: { f: f } %>

@@ -27,6 +27,12 @@ RSpec.describe SharePrice, type: :model do
     end
 
     context 'with invalid details' do
+      shared_examples 'an invalid share price' do
+        it 'is invalid' do
+          expect(share_price).not_to be_valid
+        end
+      end
+
       context 'when the stock already has a price for that year' do
         let!(:existing_stock_price) do
           stock.share_prices.create!(
@@ -36,25 +42,31 @@ RSpec.describe SharePrice, type: :model do
           )
         end
 
-        it 'is invalid' do
-          expect(share_price).not_to be_valid
-        end
+        it_behaves_like 'an invalid share price'
       end
 
       context 'when the stock does not have a high value' do
         let(:high_value) {}
 
-        it 'is invalid' do
-          expect(share_price).not_to be_valid
-        end
+        it_behaves_like 'an invalid share price'
+      end
+
+      context 'when the high value is not a number' do
+        let(:high_value) { 'test' }
+
+        it_behaves_like 'an invalid share price'
       end
 
       context 'when the stock does not have a low value' do
         let(:low_value) {}
 
-        it 'is invalid' do
-          expect(share_price).not_to be_valid
-        end
+        it_behaves_like 'an invalid share price'
+      end
+
+      context 'when the low value is not a number' do
+        let(:low_value) { 'test' }
+
+        it_behaves_like 'an invalid share price'
       end
     end
   end
