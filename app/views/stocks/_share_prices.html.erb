@@ -1,3 +1,23 @@
 <h3>Share Prices</h3>
 
 <%= link_to 'Add Share Price', new_stock_share_price_path(@stock) %>
+
+<table>
+  <thead>
+    <tr>
+      <td>Year</td>
+      <td>High ($)</td>
+      <td>Low ($)</td>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stock.share_prices.each do |price| %>
+      <tr>
+        <td><%= price.year.year_number %></td>
+        <td><%= dollar_value(price.high_value) %></td>
+        <td><%= dollar_value(price.low_value) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
