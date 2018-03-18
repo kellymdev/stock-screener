@@ -7,9 +7,23 @@ class EarningsController < ApplicationController
     @earning = @stock.earnings.new
   end
 
+  def create
+    @earning = @stock.earnings.new(earning_params)
+
+    if @earning.save
+      redirect_to @stock
+    else
+      render :new
+    end
+  end
+
   private
 
   def find_stock
     @stock = Stock.find(params[:stock_id])
+  end
+
+  def earning_params
+    params.require(:earning).permit(:year_id, :value)
   end
 end
