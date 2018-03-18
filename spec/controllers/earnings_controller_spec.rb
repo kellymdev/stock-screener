@@ -8,7 +8,14 @@ RSpec.describe EarningsController, type: :controller do
       ticker_symbol: 'TST'
     )
   end
-  let(:year) { Year.create!(year_number: 2017) }
+  let(:year_2017) { Year.create!(year_number: 2017) }
+  let(:year_2016) { Year.create!(year_number: 2016) }
+  let!(:earning) do
+    stock.earnings.create!(
+      year: year_2016,
+      value: 0.45
+    )
+  end
 
   describe '#new' do
     it 'returns http status 200' do
@@ -21,7 +28,7 @@ RSpec.describe EarningsController, type: :controller do
       {
         stock_id: stock.id,
         earning: {
-          year_id: year.id,
+          year_id: year_2017.id,
           value: value
         }
       }
@@ -41,6 +48,14 @@ RSpec.describe EarningsController, type: :controller do
       it 'does not create an earning' do
         expect { post :create, params: params }.to change { Earning.count }.by 0
       end
+    end
+  end
+
+  describe '#edit' do
+    it 'returns http status 200' do
+      get :edit, params: { id: earning.id }
+
+      expect(response.status).to eq 200
     end
   end
 end

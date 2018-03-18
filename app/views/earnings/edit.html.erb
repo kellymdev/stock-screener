@@ -1,0 +1,9 @@
+<h2>Edit Earning for <%= full_ticker_symbol(@earning.stock) %></h2>
+
+<%= render partial: 'shared/errors', locals: { item: @earning } if @earning.errors.any? %>
+
+<%= form_for([@stock, @earning]) do |f| %>
+  <%= render partial: 'form', locals: { f: f } %>
+
+  <%= f.submit 'Update Earning' %>
+<% end %>
