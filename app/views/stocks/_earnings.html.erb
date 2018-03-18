@@ -16,7 +16,7 @@
       <tr>
         <td><%= earning.year.year_number %></td>
         <td><%= dollar_value(earning.value) %></td>
-        <td><%= link_to 'Edit', edit_earning_path(earning) %></td>
+        <td><%= link_to 'Edit', edit_earning_path(earning) %> | <%= link_to 'Delete', earning_path(earning), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

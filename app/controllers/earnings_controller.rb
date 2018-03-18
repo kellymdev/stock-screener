@@ -2,7 +2,7 @@
 
 class EarningsController < ApplicationController
   before_action :find_stock, only: [:new, :create]
-  before_action :find_earning, only: [:edit, :update]
+  before_action :find_earning, only: [:edit, :update, :destroy]
 
   def new
     @earning = @stock.earnings.new
@@ -26,6 +26,13 @@ class EarningsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @stock = @earning.stock
+    @earning.destroy!
+
+    redirect_to @stock
   end
 
   private

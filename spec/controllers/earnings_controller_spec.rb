@@ -90,4 +90,10 @@ RSpec.describe EarningsController, type: :controller do
       end
     end
   end
+
+  describe '#destroy' do
+    it 'deletes the earning' do
+      expect { delete :destroy, params: { id: earning.id } }.to change { Earning.count }.by -1
+    end
+  end
 end
