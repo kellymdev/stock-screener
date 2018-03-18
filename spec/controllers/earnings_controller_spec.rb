@@ -58,4 +58,36 @@ RSpec.describe EarningsController, type: :controller do
       expect(response.status).to eq 200
     end
   end
+
+  describe '#update' do
+    let(:params) do
+      {
+        id: earning.id,
+        earning: {
+          year_id: year_2016.id,
+          value: value
+        }
+      }
+    end
+
+    context 'with valid params' do
+      let(:value) { 0.67 }
+
+      it 'updates the earning' do
+        put :update, params: params
+
+        expect(earning.reload.value).to eq value
+      end
+    end
+
+    context 'with invalid params' do
+      let(:value) { 'test' }
+
+      it 'does not update the earning' do
+        put :update, params: params
+
+        expect(earning.reload.value).to eq 0.45
+      end
+    end
+  end
 end

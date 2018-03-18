@@ -20,6 +20,14 @@ class EarningsController < ApplicationController
 
   def edit; end
 
+  def update
+    if @earning.update(earning_params)
+      redirect_to @earning.stock
+    else
+      render :edit
+    end
+  end
+
   private
 
   def find_stock
