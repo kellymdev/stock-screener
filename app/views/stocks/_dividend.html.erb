@@ -1,0 +1,5 @@
+<tr>
+  <td><%= dividend.year.year_number %></td>
+  <td><%= dollar_value(dividend.value) %></td>
+  <td><%= link_to 'Edit', edit_dividend_path(dividend) %> | <%= link_to 'Delete', dividend_path(dividend), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>

@@ -12,12 +12,6 @@
   </thead>
 
   <tbody>
-    <% @stock.earnings.each do |earning| %>
-      <tr>
-        <td><%= earning.year.year_number %></td>
-        <td><%= dollar_value(earning.value) %></td>
-        <td><%= link_to 'Edit', edit_earning_path(earning) %> | <%= link_to 'Delete', earning_path(earning), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+    <%= render partial: 'earning', collection: @stock.earnings %>
   </tbody>
 </table>
