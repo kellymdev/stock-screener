@@ -9,4 +9,8 @@ class Stock < ApplicationRecord
   validates :company_name, presence: true, length: { minimum: 5 }
   validates :ticker_symbol, presence: true, length: { minimum: 2 },
                             uniqueness: { scope: :stock_exchange, message: 'should be unique for each stock exchange' }
+
+  def can_calculate_price_earnings_ratio?(year_number)
+    share_prices.for_year(year_number).present? && earnings.for_year(year_number).present?
+  end
 end
