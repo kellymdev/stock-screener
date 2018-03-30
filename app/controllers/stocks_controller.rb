@@ -12,7 +12,7 @@ class StocksController < ApplicationController
     @stock = @stock_exchange.stocks.new(stock_params)
 
     if @stock.save
-      redirect_to @stock
+      redirect_to @stock, notice: 'Stock successfully added'
     else
       render :new
     end
@@ -24,7 +24,7 @@ class StocksController < ApplicationController
 
   def update
     if @stock.update(stock_params)
-      redirect_to @stock
+      redirect_to @stock, notice: 'Stock successfully updated'
     else
       render :edit
     end

@@ -12,7 +12,7 @@ class DividendsController < ApplicationController
     @dividend = @stock.dividends.new(dividend_params)
 
     if @dividend.save
-      redirect_to @stock
+      redirect_to @stock, notice: 'Dividend successfully added'
     else
       render :new
     end
@@ -22,7 +22,7 @@ class DividendsController < ApplicationController
 
   def update
     if @dividend.update(dividend_params)
-      redirect_to @dividend.stock
+      redirect_to @dividend.stock, notice: 'Dividend successfully updated'
     else
       render :edit
     end

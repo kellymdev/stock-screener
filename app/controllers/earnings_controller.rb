@@ -12,7 +12,7 @@ class EarningsController < ApplicationController
     @earning = @stock.earnings.new(earning_params)
 
     if @earning.save
-      redirect_to @stock
+      redirect_to @stock, notice: 'Earning successfully added'
     else
       render :new
     end
@@ -22,7 +22,7 @@ class EarningsController < ApplicationController
 
   def update
     if @earning.update(earning_params)
-      redirect_to @earning.stock
+      redirect_to @earning.stock, notice: 'Earning successfully updated'
     else
       render :edit
     end

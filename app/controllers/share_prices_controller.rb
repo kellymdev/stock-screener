@@ -12,7 +12,7 @@ class SharePricesController < ApplicationController
     @share_price = @stock.share_prices.new(share_price_params)
 
     if @share_price.save
-      redirect_to @stock
+      redirect_to @stock, notice: 'Share price successfully added'
     else
       render :new
     end
@@ -22,7 +22,7 @@ class SharePricesController < ApplicationController
 
   def update
     if @share_price.update(share_price_params)
-      redirect_to @share_price.stock
+      redirect_to @share_price.stock, notice: 'Share price successfully updated'
     else
       render :edit
     end
