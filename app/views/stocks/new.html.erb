@@ -5,5 +5,5 @@
 <%= form_for([@stock_exchange, @stock]) do |f| %>
   <%= render partial: 'form', locals: { f: f } %>
 
-  <%= f.submit 'Create Stock' %>
+  <%= f.submit 'Create Stock' %> <%= link_to 'Cancel', stock_exchange_path(@stock_exchange) %>
 <% end %>
