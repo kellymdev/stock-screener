@@ -13,4 +13,8 @@ class Stock < ApplicationRecord
   def can_calculate_price_earnings_ratio?(year_number)
     share_prices.for_year(year_number).present? && earnings.for_year(year_number).present?
   end
+
+  def can_generate_report?(year_number)
+    can_calculate_price_earnings_ratio?(year_number) && dividends.for_year(year_number).present?
+  end
 end

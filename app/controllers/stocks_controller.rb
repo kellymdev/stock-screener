@@ -30,6 +30,11 @@ class StocksController < ApplicationController
     end
   end
 
+  def report
+    @stock = Stock.find(params[:stock_id])
+    @report = GenerateStockReport.new(@stock).call
+  end
+
   private
 
   def find_stock_exchange

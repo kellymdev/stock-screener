@@ -10,6 +10,7 @@ class SharePrice < ApplicationRecord
 
   validate :high_value_greater_than_low_value
 
+  scope :by_year, -> { joins(:year).order("years.year_number") }
   scope :for_year, ->(year) { where(year: Year.find_by(year_number: year)) }
 
   private

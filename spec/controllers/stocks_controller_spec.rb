@@ -94,4 +94,18 @@ RSpec.describe StocksController, type: :controller do
       end
     end
   end
+
+  describe '#report' do
+    it 'returns http status 200' do
+      get :report, params: { stock_id: stock.id }
+
+      expect(response.status).to eq 200
+    end
+
+    it 'generates a stock report' do
+      expect(GenerateStockReport).to receive(:new).with(stock).and_call_original
+
+      get :report, params: { stock_id: stock.id }
+    end
+  end
 end

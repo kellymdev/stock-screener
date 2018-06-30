@@ -119,4 +119,50 @@ RSpec.describe Stock, type: :model do
       end
     end
   end
+
+  describe '#can_generate_report?' do
+    let!(:year_1) { Year.create!(year_number: 2017) }
+    let!(:year_2) { Year.create!(year_number: 2016) }
+    let!(:share_price) do
+      stock.share_prices.create!(
+        year: year_1,
+        high_value: 2.05,
+        low_value: 1.23
+      )
+    end
+    let!(:earning) do
+      stock.earnings.create!(
+        year: year_1,
+        value: 0.05
+      )
+    end
+    let!(:dividend) do
+      stock.dividends.create!(
+        year: year_1,
+        value: 0.03
+      )
+    end
+
+    context 'when share price, earnings and dividend data exists for a year' do
+      it 'returns true' do
+        expect(stock.can_generate_report?(2017)).to eq true
+      end
+    end
+
+    context 'when only the dividend data exists for a year' do
+      before do
+        dividend.update!(year: year_2)
+      end
+
+      it 'returns false' do
+        expect(stock.can_generate_report?(2016)).to eq false
+      end
+    end
+
+    context 'when no data exists for a year' do
+      it 'returns false' do
+        expect(stock.can_generate_report?(2016)).to eq false
+      end
+    end
+  end
 end
