@@ -20,7 +20,7 @@ class CalculatePriceEarningsRatio
   private
 
   def calculate_pe_ratio(price_amount, earning_amount)
-    price_amount / earning_amount
+    (price_amount / earning_amount).round(1)
   end
 
   def price

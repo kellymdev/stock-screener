@@ -27,8 +27,8 @@ RSpec.describe CalculatePriceEarningsRatio, type: :service do
       end
       let(:expected_result) do
         {
-          high_pe_ratio: 2.625,
-          low_pe_ratio: 1.875
+          high_pe_ratio: 2.6,
+          low_pe_ratio: 1.9
         }
       end
 
