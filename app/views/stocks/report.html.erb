@@ -1,3 +1,33 @@
 <h2>Stock Report for: <%= @stock.company_name %></h2>
 <p>Ticker symbol: <%= full_ticker_symbol(@stock) %></p>
-<p>Report generated: </p>
+<p>Report generated: <%= @report[:generated_at] %></p>
+
+<div class="report-data">
+  <table>
+    <thead>
+      <tr>
+        <td>Year</td>
+        <td>High Price ($)</td>
+        <td>Low Price ($)</td>
+        <td>High PE Ratio</td>
+        <td>Low PE Ratio</td>
+        <td>Earnings ($)</td>
+        <td>Dividends ($)</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @report[:report_data].each do |year_data| %>
+        <tr>
+          <td><%= year_data.first %></td>
+          <td><%= year_data.second[:high_price] %></td>
+          <td><%= year_data.second[:low_price] %></td>
+          <td><%= year_data.second[:high_pe_ratio] %></td>
+          <td><%= year_data.second[:low_pe_ratio] %></td>
+          <td><%= year_data.second[:earnings] %></td>
+          <td><%= year_data.second[:total_dividends] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
