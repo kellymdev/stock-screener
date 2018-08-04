@@ -79,20 +79,14 @@ class GenerateStockReport
 
   def create_report_summary(data)
     {
-      total_dividends: total_dividends(data),
-      total_retained_earnings: total_retained_earnings(data)
+      total_dividends: sum_data(data, :total_dividends),
+      total_retained_earnings: sum_data(data, :retained_earnings)
     }
   end
 
-  def total_dividends(data)
+  def sum_data(data, key)
     data.map do |year_data|
-      year_data.second[:total_dividends]
-    end.reduce(:+)
-  end
-
-  def total_retained_earnings(data)
-    data.map do |year_data|
-      year_data.second[:retained_earnings]
+      year_data.second[key]
     end.reduce(:+)
   end
 end
