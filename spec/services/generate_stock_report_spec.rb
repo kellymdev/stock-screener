@@ -38,6 +38,10 @@ RSpec.describe GenerateStockReport, type: :controller do
                 total_dividends: '0.17'.to_d,
                 retained_earnings: '0.78'.to_d
               }
+            },
+            report_summary: {
+              total_dividends: '0.17'.to_d,
+              total_retained_earnings: '0.78'.to_d
             }
           }
         end
@@ -77,6 +81,10 @@ RSpec.describe GenerateStockReport, type: :controller do
                 total_dividends: '0.08'.to_d,
                 retained_earnings: '0.67'.to_d
               }
+            },
+            report_summary: {
+              total_dividends: '0.25'.to_d,
+              total_retained_earnings: '1.45'.to_d
             }
           }
         end
@@ -101,6 +109,10 @@ RSpec.describe GenerateStockReport, type: :controller do
                 total_dividends: '0.17'.to_d,
                 retained_earnings: '0.78'.to_d
               }
+            },
+            report_summary: {
+              total_dividends: '0.17'.to_d,
+              total_retained_earnings: '0.78'.to_d
             }
           }
         end

@@ -16,7 +16,8 @@ class GenerateStockReport
 
     {
       generated_at: Time.now.to_s,
-      report_data: data
+      report_data: data,
+      report_summary: create_report_summary(data)
     }
   end
 
@@ -74,5 +75,24 @@ class GenerateStockReport
 
   def calculate_pe_ratio_for(year)
     CalculatePriceEarningsRatio.new(year, stock).call
+  end
+
+  def create_report_summary(data)
+    {
+      total_dividends: total_dividends(data),
+      total_retained_earnings: total_retained_earnings(data)
+    }
+  end
+
+  def total_dividends(data)
+    data.map do |year_data|
+      year_data.second[:total_dividends]
+    end.reduce(:+)
+  end
+
+  def total_retained_earnings(data)
+    data.map do |year_data|
+      year_data.second[:retained_earnings]
+    end.reduce(:+)
   end
 end

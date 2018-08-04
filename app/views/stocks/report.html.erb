@@ -30,6 +30,17 @@
           <td><%= dollar_value(data[:retained_earnings]) %></td>
         </tr>
       <% end %>
+
+      <tr>
+        <td>Total</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><%= dollar_value(@report[:report_summary][:total_dividends]) %></td>
+        <td><%= dollar_value(@report[:report_summary][:total_retained_earnings]) %></td>
+      </tr>
     </tbody>
   </table>
 </div>
