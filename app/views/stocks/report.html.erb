@@ -2,45 +2,6 @@
 <p>Ticker symbol: <%= full_ticker_symbol(@stock) %></p>
 <p>Report generated: <%= @report[:generated_at] %></p>
 
-<div class="report-data">
-  <table>
-    <thead>
-      <tr>
-        <td>Year</td>
-        <td>High Price ($)</td>
-        <td>Low Price ($)</td>
-        <td>High PE Ratio</td>
-        <td>Low PE Ratio</td>
-        <td>Earnings ($)</td>
-        <td>Dividends ($)</td>
-        <td>Retained Earnings ($)</td>
-      </tr>
-    </thead>
+<%= render partial: 'report/report_data_table' %>
 
-    <tbody>
-      <% @report[:report_data].each_pair do |year, data| %>
-        <tr>
-          <td><%= year %></td>
-          <td><%= dollar_value(data[:high_price]) %></td>
-          <td><%= dollar_value(data[:low_price]) %></td>
-          <td><%= data[:high_pe_ratio] %></td>
-          <td><%= data[:low_pe_ratio] %></td>
-          <td><%= dollar_value(data[:earnings]) %></td>
-          <td><%= dollar_value(data[:total_dividends]) %></td>
-          <td><%= dollar_value(data[:retained_earnings]) %></td>
-        </tr>
-      <% end %>
-
-      <tr>
-        <td>Total</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><%= dollar_value(@report[:report_summary][:total_dividends]) %></td>
-        <td><%= dollar_value(@report[:report_summary][:total_retained_earnings]) %></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<%= render partial: 'report/investment_summary' %>

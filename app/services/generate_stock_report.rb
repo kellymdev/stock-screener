@@ -78,9 +78,17 @@ class GenerateStockReport
   end
 
   def create_report_summary(data)
+    return {} unless data.present?
+
+    dividends = sum_data(data, :total_dividends)
+    retained_earnings = sum_data(data, :retained_earnings)
+    dividend_percentage = calculate_dividend_percentage(dividends, retained_earnings)
+
     {
-      total_dividends: sum_data(data, :total_dividends),
-      total_retained_earnings: sum_data(data, :retained_earnings)
+      total_dividends: dividends,
+      total_retained_earnings: retained_earnings,
+      dividend_percentage: dividend_percentage,
+      retained_earnings_percentage: (100 - dividend_percentage)
     }
   end
 
@@ -88,5 +96,9 @@ class GenerateStockReport
     data.map do |year_data|
       year_data.second[key]
     end.reduce(:+)
+  end
+
+  def calculate_dividend_percentage(dividends, retained_earnings)
+    (dividends / (dividends + retained_earnings) * 100).round(2)
   end
 end
