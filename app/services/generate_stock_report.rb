@@ -10,7 +10,7 @@ class GenerateStockReport
   def call
     data = {}
 
-    years_for_report.each do |year_num|
+    years_for_report.reverse.each do |year_num|
       data[year_num] = data_for_year(year_num)
     end
 
