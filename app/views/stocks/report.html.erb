@@ -18,16 +18,16 @@
     </thead>
 
     <tbody>
-      <% @report[:report_data].each do |year_data| %>
+      <% @report[:report_data].each_pair do |year, data| %>
         <tr>
-          <td><%= year_data.first %></td>
-          <td><%= dollar_value(year_data.second[:high_price]) %></td>
-          <td><%= dollar_value(year_data.second[:low_price]) %></td>
-          <td><%= year_data.second[:high_pe_ratio] %></td>
-          <td><%= year_data.second[:low_pe_ratio] %></td>
-          <td><%= dollar_value(year_data.second[:earnings]) %></td>
-          <td><%= dollar_value(year_data.second[:total_dividends]) %></td>
-          <td><%= dollar_value(year_data.second[:retained_earnings]) %></td>
+          <td><%= year %></td>
+          <td><%= dollar_value(data[:high_price]) %></td>
+          <td><%= dollar_value(data[:low_price]) %></td>
+          <td><%= data[:high_pe_ratio] %></td>
+          <td><%= data[:low_pe_ratio] %></td>
+          <td><%= dollar_value(data[:earnings]) %></td>
+          <td><%= dollar_value(data[:total_dividends]) %></td>
+          <td><%= dollar_value(data[:retained_earnings]) %></td>
         </tr>
       <% end %>
     </tbody>
