@@ -20,12 +20,12 @@
       <% @report[:report_data].each do |year_data| %>
         <tr>
           <td><%= year_data.first %></td>
-          <td><%= year_data.second[:high_price] %></td>
-          <td><%= year_data.second[:low_price] %></td>
+          <td><%= dollar_value(year_data.second[:high_price]) %></td>
+          <td><%= dollar_value(year_data.second[:low_price]) %></td>
           <td><%= year_data.second[:high_pe_ratio] %></td>
           <td><%= year_data.second[:low_pe_ratio] %></td>
-          <td><%= year_data.second[:earnings] %></td>
-          <td><%= year_data.second[:total_dividends] %></td>
+          <td><%= dollar_value(year_data.second[:earnings]) %></td>
+          <td><%= dollar_value(year_data.second[:total_dividends]) %></td>
         </tr>
       <% end %>
     </tbody>
