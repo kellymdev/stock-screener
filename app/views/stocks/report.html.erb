@@ -13,6 +13,7 @@
         <td>Low PE Ratio</td>
         <td>Earnings ($)</td>
         <td>Dividends ($)</td>
+        <td>Retained Earnings ($)</td>
       </tr>
     </thead>
 
@@ -26,6 +27,7 @@
           <td><%= year_data.second[:low_pe_ratio] %></td>
           <td><%= dollar_value(year_data.second[:earnings]) %></td>
           <td><%= dollar_value(year_data.second[:total_dividends]) %></td>
+          <td><%= dollar_value(year_data.second[:retained_earnings]) %></td>
         </tr>
       <% end %>
     </tbody>

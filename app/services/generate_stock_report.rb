@@ -50,20 +50,26 @@ class GenerateStockReport
 
   def data_for_year(year_number)
     price = stock.share_prices.for_year(year_number).first
-    earning = stock.earnings.for_year(year_number).first
-    dividends = stock.dividends.for_year(year_number)
+    earnings = stock.earnings.for_year(year_number).first.value
+    dividends = stock.dividends.for_year(year_number).sum(:value)
 
     year = Year.find_by(year_number: year_number)
     pe_ratio = calculate_pe_ratio_for(year)
+    retained_earnings = calculate_retained_earnings(earnings, dividends)
 
     {
       high_price: price.high_value,
       low_price: price.low_value,
       high_pe_ratio: pe_ratio[:high_pe_ratio],
       low_pe_ratio: pe_ratio[:low_pe_ratio],
-      earnings: earning.value,
-      total_dividends: dividends.sum(:value)
+      earnings: earnings,
+      total_dividends: dividends,
+      retained_earnings: retained_earnings
     }
+  end
+
+  def calculate_retained_earnings(earning_value, dividend_value)
+    earning_value - dividend_value
   end
 
   def calculate_pe_ratio_for(year)

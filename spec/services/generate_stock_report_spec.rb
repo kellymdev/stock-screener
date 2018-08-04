@@ -35,7 +35,8 @@ RSpec.describe GenerateStockReport, type: :controller do
                 high_pe_ratio: '3.1'.to_d,
                 low_pe_ratio: '1.5'.to_d,
                 earnings: '0.95'.to_d,
-                total_dividends: '0.17'.to_d
+                total_dividends: '0.17'.to_d,
+                retained_earnings: '0.78'.to_d
               }
             }
           }
@@ -64,7 +65,8 @@ RSpec.describe GenerateStockReport, type: :controller do
                 high_pe_ratio: '3.1'.to_d,
                 low_pe_ratio: '1.5'.to_d,
                 earnings: '0.95'.to_d,
-                total_dividends: '0.17'.to_d
+                total_dividends: '0.17'.to_d,
+                retained_earnings: '0.78'.to_d
               },
               2016 => {
                 high_price: '3.47'.to_d,
@@ -72,7 +74,8 @@ RSpec.describe GenerateStockReport, type: :controller do
                 high_pe_ratio: '4.6'.to_d,
                 low_pe_ratio: '3.7'.to_d,
                 earnings: '0.75'.to_d,
-                total_dividends: '0.08'.to_d
+                total_dividends: '0.08'.to_d,
+                retained_earnings: '0.67'.to_d
               }
             }
           }
@@ -95,7 +98,8 @@ RSpec.describe GenerateStockReport, type: :controller do
                 high_pe_ratio: '3.1'.to_d,
                 low_pe_ratio: '1.5'.to_d,
                 earnings: '0.95'.to_d,
-                total_dividends: '0.17'.to_d
+                total_dividends: '0.17'.to_d,
+                retained_earnings: '0.78'.to_d
               }
             }
           }
