@@ -12,6 +12,6 @@
   </thead>
 
   <tbody>
-    <%= render partial: 'earning', collection: @stock.earnings %>
+    <%= render partial: 'earning', collection: @stock.earnings.by_year %>
   </tbody>
 </table>

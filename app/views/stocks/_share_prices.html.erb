@@ -13,6 +13,6 @@
   </thead>
 
   <tbody>
-    <%= render partial: 'price', collection: @stock.share_prices %>
+    <%= render partial: 'price', collection: @stock.share_prices.by_year %>
   </tbody>
 </table>
