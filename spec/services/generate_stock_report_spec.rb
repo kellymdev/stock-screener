@@ -44,7 +44,12 @@ RSpec.describe GenerateStockReport, type: :controller do
               total_retained_earnings: '0.78'.to_d,
               dividend_percentage: '17.89'.to_d,
               retained_earnings_percentage: '82.11'.to_d,
-              per_share_growth_rate: '0.00'.to_d
+              initial_rate_of_return: {
+                estimated_earnings: '0.95'.to_d
+              },
+              growth: {
+                per_share_growth_rate: '0.00'.to_d
+              }
             }
           }
         end
@@ -66,15 +71,6 @@ RSpec.describe GenerateStockReport, type: :controller do
           {
             generated_at: time.to_s,
             report_data: {
-              2017 => {
-                high_price: '2.99'.to_d,
-                low_price: '1.45'.to_d,
-                high_pe_ratio: '3.1'.to_d,
-                low_pe_ratio: '1.5'.to_d,
-                earnings: '0.95'.to_d,
-                total_dividends: '0.17'.to_d,
-                retained_earnings: '0.78'.to_d
-              },
               2016 => {
                 high_price: '3.47'.to_d,
                 low_price: '2.81'.to_d,
@@ -83,6 +79,15 @@ RSpec.describe GenerateStockReport, type: :controller do
                 earnings: '0.75'.to_d,
                 total_dividends: '0.08'.to_d,
                 retained_earnings: '0.67'.to_d
+              },
+              2017 => {
+                high_price: '2.99'.to_d,
+                low_price: '1.45'.to_d,
+                high_pe_ratio: '3.1'.to_d,
+                low_pe_ratio: '1.5'.to_d,
+                earnings: '0.95'.to_d,
+                total_dividends: '0.17'.to_d,
+                retained_earnings: '0.78'.to_d
               }
             },
             report_summary: {
@@ -90,7 +95,12 @@ RSpec.describe GenerateStockReport, type: :controller do
               total_retained_earnings: '1.45'.to_d,
               dividend_percentage: '14.71'.to_d,
               retained_earnings_percentage: '85.29'.to_d,
-              per_share_growth_rate: '27.00'.to_d
+              initial_rate_of_return: {
+                estimated_earnings: '1.21'.to_d
+              },
+              growth: {
+                per_share_growth_rate: '27.00'.to_d
+              }
             }
           }
         end

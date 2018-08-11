@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class GenerateStockReport
-  attr_reader :stock
+  attr_reader :stock, :first_year, :last_year
 
   def initialize(stock)
     @stock = stock
@@ -10,7 +10,11 @@ class GenerateStockReport
   def call
     data = {}
 
-    years_for_report.reverse.each do |year_num|
+    years = years_for_report.reverse
+    @first_year = years.first
+    @last_year = years.last
+
+    years.each do |year_num|
       data[year_num] = data_for_year(year_num)
     end
 
@@ -90,7 +94,12 @@ class GenerateStockReport
       total_retained_earnings: retained_earnings,
       dividend_percentage: dividend_percentage,
       retained_earnings_percentage: (100 - dividend_percentage),
-      per_share_growth_rate: per_share_growth_rate
+      initial_rate_of_return: {
+        estimated_earnings: calculate_estimated_earnings(data, per_share_growth_rate)
+      },
+      growth: {
+        per_share_growth_rate: per_share_growth_rate
+      }
     }
   end
 
@@ -105,13 +114,21 @@ class GenerateStockReport
   end
 
   def calculate_per_share_growth_rate(data)
-    years = data.keys
+    return '0.00'.to_d if single_year_report?
 
-    return '0.00'.to_d unless years.size > 1
+    present_value = data[@first_year][:earnings]
+    future_value = data[@last_year][:earnings]
 
-    present_value = data[years.first][:earnings]
-    future_value = data[years.last][:earnings]
+    CalculateRateOfReturn.new(present_value, future_value, @last_year - @first_year).call
+  end
 
-    CalculateRateOfReturn.new(present_value, future_value, years.size - 1).call
+  def calculate_estimated_earnings(data, per_share_growth_rate)
+    earnings = data[@last_year][:earnings]
+
+    ((earnings * per_share_growth_rate / 100) + earnings).round(2)
+  end
+
+  def single_year_report?
+    @first_year == @last_year
   end
 end

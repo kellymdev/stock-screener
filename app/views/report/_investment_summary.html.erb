@@ -1,10 +1,13 @@
 <div class="investment_summary">
   <h3>Investment Summary</h3>
 
+  <h4>Initial Rate of Return</h4>
+  <p>Estimated Earnings: <%= dollar_value(@report[:report_summary][:initial_rate_of_return][:estimated_earnings]) %>
+
   <h4>Dividends versus Retained Earnings</h4>
   <p>Dividends: <%= @report[:report_summary][:dividend_percentage] %>%</p>
   <p>Retained Earnings: <%= @report[:report_summary][:retained_earnings_percentage] %>%</p>
 
   <h4>Growth</h4>
-  <p>Per Share Growth Rate: <%= @report[:report_summary][:per_share_growth_rate] %>%</p>
+  <p>Per Share Growth Rate: <%= @report[:report_summary][:growth][:per_share_growth_rate] %>%</p>
 </div>
