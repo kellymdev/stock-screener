@@ -83,12 +83,14 @@ class GenerateStockReport
     dividends = sum_data(data, :total_dividends)
     retained_earnings = sum_data(data, :retained_earnings)
     dividend_percentage = calculate_dividend_percentage(dividends, retained_earnings)
+    per_share_growth_rate = calculate_per_share_growth_rate(data)
 
     {
       total_dividends: dividends,
       total_retained_earnings: retained_earnings,
       dividend_percentage: dividend_percentage,
-      retained_earnings_percentage: (100 - dividend_percentage)
+      retained_earnings_percentage: (100 - dividend_percentage),
+      per_share_growth_rate: per_share_growth_rate
     }
   end
 
@@ -100,5 +102,16 @@ class GenerateStockReport
 
   def calculate_dividend_percentage(dividends, retained_earnings)
     (dividends / (dividends + retained_earnings) * 100).round(2)
+  end
+
+  def calculate_per_share_growth_rate(data)
+    years = data.keys
+
+    return '0.00'.to_d unless years.size > 1
+
+    present_value = data[years.first][:earnings]
+    future_value = data[years.last][:earnings]
+
+    CalculateRateOfReturn.new(present_value, future_value, years.size - 1).call
   end
 end
