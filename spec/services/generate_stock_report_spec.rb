@@ -52,7 +52,8 @@ RSpec.describe GenerateStockReport, type: :controller do
               retained_earnings_percentage: '82.11'.to_d,
               initial_rate_of_return: {
                 current_price: '4.00'.to_d,
-                estimated_earnings: '0.95'.to_d
+                estimated_earnings: '0.95'.to_d,
+                initial_rate_of_return: '23.75'.to_d
               },
               growth: {
                 per_share_growth_rate: '0.00'.to_d
@@ -104,7 +105,8 @@ RSpec.describe GenerateStockReport, type: :controller do
               retained_earnings_percentage: '85.29'.to_d,
               initial_rate_of_return: {
                 current_price: '4.00'.to_d,
-                estimated_earnings: '1.21'.to_d
+                estimated_earnings: '1.21'.to_d,
+                initial_rate_of_return: '30.25'.to_d
               },
               growth: {
                 per_share_growth_rate: '27.00'.to_d

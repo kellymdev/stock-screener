@@ -89,6 +89,7 @@ class GenerateStockReport
     retained_earnings = sum_data(data, :retained_earnings)
     dividend_percentage = calculate_dividend_percentage(dividends, retained_earnings)
     per_share_growth_rate = calculate_per_share_growth_rate(data)
+    estimated_earnings = calculate_estimated_earnings(data, per_share_growth_rate)
 
     {
       total_dividends: dividends,
@@ -97,7 +98,8 @@ class GenerateStockReport
       retained_earnings_percentage: (100 - dividend_percentage),
       initial_rate_of_return: {
         current_price: current_price,
-        estimated_earnings: calculate_estimated_earnings(data, per_share_growth_rate)
+        estimated_earnings: estimated_earnings,
+        initial_rate_of_return: calculate_initial_rate_of_return(estimated_earnings)
       },
       growth: {
         per_share_growth_rate: per_share_growth_rate
@@ -128,6 +130,10 @@ class GenerateStockReport
     earnings = data[@last_year][:earnings]
 
     ((earnings * per_share_growth_rate / 100) + earnings).round(2)
+  end
+
+  def calculate_initial_rate_of_return(estimated_earnings)
+    (estimated_earnings / current_price * 100).round(2)
   end
 
   def single_year_report?
