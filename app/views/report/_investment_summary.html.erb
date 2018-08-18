@@ -5,6 +5,7 @@
   <p>Based on a current price of $<%= dollar_value(@report[:report_summary][:initial_rate_of_return][:current_price]) %></p>
   <p>Estimated Earnings: <%= dollar_value(@report[:report_summary][:initial_rate_of_return][:estimated_earnings]) %></p>
   <p>Initial Rate of Return: <%= @report[:report_summary][:initial_rate_of_return][:initial_rate_of_return] %>%</p>
+  <p>Value Relative to Government Bonds: <%= @report[:report_summary][:initial_rate_of_return][:value_relative_to_government_bonds] %></p>
 
   <h4>Dividends versus Retained Earnings</h4>
   <p>Dividends: <%= @report[:report_summary][:dividend_percentage] %>%</p>

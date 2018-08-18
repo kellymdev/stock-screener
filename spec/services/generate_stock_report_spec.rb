@@ -18,9 +18,11 @@ RSpec.describe GenerateStockReport, type: :controller do
     let!(:dividend_2) { stock.dividends.create!(year: year_1, value: 0.12) }
     let(:time) { Time.parse("2018-07-07 16:23:32 +1200") }
     let(:current_price) { '4.00' }
+    let(:government_bond_interest_rate) { '3.00' }
     let(:report_params) do
       {
-        current_price: current_price
+        current_price: current_price,
+        government_bond_interest_rate: government_bond_interest_rate
       }
     end
     let(:service) { described_class.new(stock, report_params) }
@@ -53,7 +55,8 @@ RSpec.describe GenerateStockReport, type: :controller do
               initial_rate_of_return: {
                 current_price: '4.00'.to_d,
                 estimated_earnings: '0.95'.to_d,
-                initial_rate_of_return: '23.75'.to_d
+                initial_rate_of_return: '23.75'.to_d,
+                value_relative_to_government_bonds: '7.92'.to_d
               },
               growth: {
                 per_share_growth_rate: '0.00'.to_d
@@ -106,7 +109,8 @@ RSpec.describe GenerateStockReport, type: :controller do
               initial_rate_of_return: {
                 current_price: '4.00'.to_d,
                 estimated_earnings: '1.21'.to_d,
-                initial_rate_of_return: '30.25'.to_d
+                initial_rate_of_return: '30.16'.to_d,
+                value_relative_to_government_bonds: '10.05'.to_d
               },
               growth: {
                 per_share_growth_rate: '27.00'.to_d

@@ -54,6 +54,6 @@ class StocksController < ApplicationController
   end
 
   def report_params
-    params.permit(:current_price)
+    params.permit(:current_price, :government_bond_interest_rate)
   end
 end

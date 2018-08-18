@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 class GenerateStockReport
-  attr_reader :stock, :current_price, :first_year, :last_year
+  attr_reader :stock, :current_price, :government_bond_interest_rate, :first_year, :last_year
 
   def initialize(stock, report_params)
     @stock = stock
     @current_price = report_params[:current_price].to_d
+    @government_bond_interest_rate = report_params[:government_bond_interest_rate].to_d
   end
 
   def call
@@ -90,16 +91,18 @@ class GenerateStockReport
     dividend_percentage = calculate_dividend_percentage(dividends, retained_earnings)
     per_share_growth_rate = calculate_per_share_growth_rate(data)
     estimated_earnings = calculate_estimated_earnings(data, per_share_growth_rate)
+    initial_rate_of_return = calculate_initial_rate_of_return(estimated_earnings)
 
     {
       total_dividends: dividends,
       total_retained_earnings: retained_earnings,
-      dividend_percentage: dividend_percentage,
-      retained_earnings_percentage: (100 - dividend_percentage),
+      dividend_percentage: dividend_percentage.round(2),
+      retained_earnings_percentage: (100 - dividend_percentage.round(2)),
       initial_rate_of_return: {
         current_price: current_price,
-        estimated_earnings: estimated_earnings,
-        initial_rate_of_return: calculate_initial_rate_of_return(estimated_earnings)
+        estimated_earnings: estimated_earnings.round(2),
+        initial_rate_of_return: initial_rate_of_return.round(2),
+        value_relative_to_government_bonds: calculate_value_relative_to_government_bonds(initial_rate_of_return).round(2)
       },
       growth: {
         per_share_growth_rate: per_share_growth_rate
@@ -114,7 +117,7 @@ class GenerateStockReport
   end
 
   def calculate_dividend_percentage(dividends, retained_earnings)
-    (dividends / (dividends + retained_earnings) * 100).round(2)
+    (dividends / (dividends + retained_earnings) * 100)
   end
 
   def calculate_per_share_growth_rate(data)
@@ -129,11 +132,15 @@ class GenerateStockReport
   def calculate_estimated_earnings(data, per_share_growth_rate)
     earnings = data[@last_year][:earnings]
 
-    ((earnings * per_share_growth_rate / 100) + earnings).round(2)
+    ((earnings * per_share_growth_rate / 100) + earnings)
   end
 
   def calculate_initial_rate_of_return(estimated_earnings)
-    (estimated_earnings / current_price * 100).round(2)
+    (estimated_earnings / current_price * 100)
+  end
+
+  def calculate_value_relative_to_government_bonds(initial_rate_of_return)
+    (initial_rate_of_return / government_bond_interest_rate)
   end
 
   def single_year_report?

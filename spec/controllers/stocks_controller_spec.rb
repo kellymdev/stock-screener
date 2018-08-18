@@ -105,12 +105,13 @@ RSpec.describe StocksController, type: :controller do
 
   describe '#report' do
     let(:current_price) { '4.00' }
+    let(:government_bond_interest_rate) { '3.0' }
     let(:report_params) do
-      ActionController::Parameters.new(current_price: current_price).permit(:current_price)
+      ActionController::Parameters.new(current_price: current_price, government_bond_interest_rate: government_bond_interest_rate).permit(:current_price, :government_bond_interest_rate)
     end
 
     it 'returns http status 200' do
-      post :report, params: { stock_id: stock.id, current_price: current_price }
+      post :report, params: { stock_id: stock.id, current_price: current_price, government_bond_interest_rate: government_bond_interest_rate }
 
       expect(response.status).to eq 200
     end
@@ -118,7 +119,7 @@ RSpec.describe StocksController, type: :controller do
     it 'generates a stock report' do
       expect(GenerateStockReport).to receive(:new).with(stock, report_params).and_call_original
 
-      post :report, params: { stock_id: stock.id, current_price: current_price }
+      post :report, params: { stock_id: stock.id, current_price: current_price, government_bond_interest_rate: government_bond_interest_rate }
     end
   end
 end
