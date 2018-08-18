@@ -95,17 +95,30 @@ RSpec.describe StocksController, type: :controller do
     end
   end
 
-  describe '#report' do
+  describe '#new_report' do
     it 'returns http status 200' do
-      get :report, params: { stock_id: stock.id }
+      get :new_report, params: { stock_id: stock.id }
+
+      expect(response.status).to eq 200
+    end
+  end
+
+  describe '#report' do
+    let(:current_price) { '4.00' }
+    let(:report_params) do
+      ActionController::Parameters.new(current_price: current_price).permit(:current_price)
+    end
+
+    it 'returns http status 200' do
+      post :report, params: { stock_id: stock.id, current_price: current_price }
 
       expect(response.status).to eq 200
     end
 
     it 'generates a stock report' do
-      expect(GenerateStockReport).to receive(:new).with(stock).and_call_original
+      expect(GenerateStockReport).to receive(:new).with(stock, report_params).and_call_original
 
-      get :report, params: { stock_id: stock.id }
+      post :report, params: { stock_id: stock.id, current_price: current_price }
     end
   end
 end

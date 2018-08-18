@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class GenerateStockReport
-  attr_reader :stock, :first_year, :last_year
+  attr_reader :stock, :current_price, :first_year, :last_year
 
-  def initialize(stock)
+  def initialize(stock, report_params)
     @stock = stock
+    @current_price = report_params[:current_price].to_d
   end
 
   def call
@@ -95,6 +96,7 @@ class GenerateStockReport
       dividend_percentage: dividend_percentage,
       retained_earnings_percentage: (100 - dividend_percentage),
       initial_rate_of_return: {
+        current_price: current_price,
         estimated_earnings: calculate_estimated_earnings(data, per_share_growth_rate)
       },
       growth: {

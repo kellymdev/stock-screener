@@ -1,0 +1,8 @@
+<h2>Generate Report for: <%= @stock.company_name %></h2>
+
+<%= form_with url: stock_report_path(@stock), local: true do |f| %>
+  <%= f.label :current_price %>
+  <%= f.text_field :current_price %>
+
+  <%= f.submit 'Generate Report' %>
+<% end %>

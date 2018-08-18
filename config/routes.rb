@@ -6,7 +6,8 @@ Rails.application.routes.draw do
       resources :share_prices, only: [:new, :create, :edit, :update, :destroy]
       resources :dividends, only: [:new, :create, :edit, :update, :destroy]
       resources :earnings, only: [:new, :create, :edit, :update, :destroy]
-      get :report, to: 'stocks#report'
+      get :new_report, to: 'stocks#new_report'
+      post :report, to: 'stocks#report'
     end
   end
 end

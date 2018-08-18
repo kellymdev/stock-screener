@@ -30,9 +30,13 @@ class StocksController < ApplicationController
     end
   end
 
+  def new_report
+    @stock = Stock.find(params[:stock_id])
+  end
+
   def report
     @stock = Stock.find(params[:stock_id])
-    @report = GenerateStockReport.new(@stock).call
+    @report = GenerateStockReport.new(@stock, report_params).call
   end
 
   private
@@ -47,5 +51,9 @@ class StocksController < ApplicationController
 
   def stock_params
     params.require(:stock).permit(:company_name, :ticker_symbol)
+  end
+
+  def report_params
+    params.permit(:current_price)
   end
 end

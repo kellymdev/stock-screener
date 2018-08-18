@@ -4,4 +4,4 @@
 
 <%= render partial: 'report/report_data_table' %>
 
-<%= render partial: 'report/investment_summary' %>
+<%= render partial: 'report/investment_summary' if @report[:report_summary].present? %>

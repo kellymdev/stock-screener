@@ -3,7 +3,7 @@
 
 <div class="actions">
   <%= link_to 'Edit Stock', edit_stock_path(@stock) %> |
-  <%= link_to 'Generate Report', stock_report_path(@stock) %>
+  <%= link_to 'Create Report', stock_new_report_path(@stock) %>
 </div>
 
 <%= render partial: 'share_prices' %>
