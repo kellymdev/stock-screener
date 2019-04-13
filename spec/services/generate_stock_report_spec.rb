@@ -58,6 +58,12 @@ RSpec.describe GenerateStockReport, type: :controller do
                 initial_rate_of_return: '23.75'.to_d,
                 value_relative_to_government_bonds: '7.92'.to_d
               },
+              pe_ratio: {
+                average_high_pe_ratio: '3.1'.to_d,
+                average_low_pe_ratio: '1.5'.to_d,
+                highest_pe_ratio: '3.1'.to_d,
+                lowest_pe_ratio: '1.5'.to_d
+              },
               growth: {
                 per_share_growth_rate: '0.00'.to_d
               }
@@ -111,6 +117,12 @@ RSpec.describe GenerateStockReport, type: :controller do
                 estimated_earnings: '1.21'.to_d,
                 initial_rate_of_return: '30.16'.to_d,
                 value_relative_to_government_bonds: '10.05'.to_d
+              },
+              pe_ratio: {
+                average_high_pe_ratio: '3.9'.to_d,
+                average_low_pe_ratio: '2.6'.to_d,
+                highest_pe_ratio: '4.6'.to_d,
+                lowest_pe_ratio: '1.5'.to_d
               },
               growth: {
                 per_share_growth_rate: '27.00'.to_d

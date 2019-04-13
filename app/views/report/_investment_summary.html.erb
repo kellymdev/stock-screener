@@ -11,6 +11,11 @@
   <p>Dividends: <%= @report[:report_summary][:dividend_percentage] %>%</p>
   <p>Retained Earnings: <%= @report[:report_summary][:retained_earnings_percentage] %>%</p>
 
+  <h4>PE Ratio</h4>
+  <p>Range: <%= @report[:report_summary][:pe_ratio][:lowest_pe_ratio] %> - <%= @report[:report_summary][:pe_ratio][:highest_pe_ratio] %></p>
+  <p>Average high: <%= @report[:report_summary][:pe_ratio][:average_high_pe_ratio] %></p>
+  <p>Average low: <%= @report[:report_summary][:pe_ratio][:average_low_pe_ratio] %></p>
+
   <h4>Growth</h4>
   <p>Per Share Growth Rate: <%= @report[:report_summary][:growth][:per_share_growth_rate] %>%</p>
 </div>

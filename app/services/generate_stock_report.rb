@@ -104,6 +104,12 @@ class GenerateStockReport
         initial_rate_of_return: initial_rate_of_return.round(2),
         value_relative_to_government_bonds: calculate_value_relative_to_government_bonds(initial_rate_of_return).round(2)
       },
+      pe_ratio: {
+        average_high_pe_ratio: calculate_average(data, :high_pe_ratio),
+        average_low_pe_ratio: calculate_average(data, :low_pe_ratio),
+        highest_pe_ratio: find_highest_value(data, :high_pe_ratio),
+        lowest_pe_ratio: find_lowest_value(data, :low_pe_ratio)
+      },
       growth: {
         per_share_growth_rate: per_share_growth_rate
       }
@@ -111,9 +117,26 @@ class GenerateStockReport
   end
 
   def sum_data(data, key)
-    data.map do |year_data|
-      year_data.second[key]
+    data.map do |year, year_data|
+      year_data[key]
     end.reduce(:+)
+  end
+
+  def calculate_average(data, key)
+    total = sum_data(data, key)
+    (total / data.keys.size).round(1)
+  end
+
+  def find_highest_value(data, key)
+    data.map do |year, year_data|
+      year_data[key]
+    end.max
+  end
+
+  def find_lowest_value(data, key)
+    data.map do |year, year_data|
+      year_data[key]
+    end.min
   end
 
   def calculate_dividend_percentage(dividends, retained_earnings)
