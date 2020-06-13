@@ -1,0 +1,9 @@
+<h2>Edit Shareholders Equity for <%= full_ticker_symbol(@shareholders_equity.stock) %></h2>
+
+<%= render partial: 'shared/errors', locals: { item: @shareholders_equity } if @shareholders_equity.errors.any? %>
+
+<%= form_with model: [@stock, @shareholders_equity], local: true do |f| %>
+  <%= render partial: 'form', locals: { f: f } %>
+
+  <%= f.submit 'Update Shareholders Equity' %> <%= link_to 'Cancel', stock_path(@shareholders_equity.stock) %>
+<% end %>

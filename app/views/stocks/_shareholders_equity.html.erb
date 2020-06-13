@@ -1,0 +1,5 @@
+<tr>
+  <td><%= shareholders_equity.year.year_number %></td>
+  <td><%= dollar_value(shareholders_equity.value) %></td>
+  <td><%= link_to 'Edit', edit_shareholders_equity_path(shareholders_equity) %> | <%= link_to 'Delete', shareholders_equity_path(shareholders_equity), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>

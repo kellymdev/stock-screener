@@ -1,0 +1,17 @@
+<h3>Shareholders Equity</h3>
+
+<%= link_to 'Add Shareholders Equity', new_stock_shareholders_equity_path(@stock) %>
+
+<table>
+  <thead>
+    <tr>
+      <td>Year</td>
+      <td>Value ($)</td>
+      <td>Actions</td>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= render partial: 'shareholders_equity', collection: @stock.shareholders_equities.by_year %>
+  </tbody>
+</table>
