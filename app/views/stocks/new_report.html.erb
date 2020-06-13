@@ -2,10 +2,10 @@
 
 <%= form_with url: stock_report_path(@stock), local: true do |f| %>
   <%= f.label :current_price %>
-  <%= f.number_field :current_price %>
+  <%= f.number_field :current_price, step: 0.01 %>
 
   <%= f.label :government_bond_interest_rate %>
-  <%= f.number_field :government_bond_interest_rate, value: 3.0 %>
+  <%= f.number_field :government_bond_interest_rate, value: 3.0, step: 0.01 %>
 
   <%= f.submit 'Generate Report' %>
 <% end %>
